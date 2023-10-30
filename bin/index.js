@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 
-import { program, InvalidArgumentError } from 'commander'
+import { program } from 'commander'
 import { start } from '../src/ui.js'
 import logo_in_text_art from '../src/logo_in_text_art.js'
 
