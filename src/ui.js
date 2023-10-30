@@ -1,7 +1,3 @@
-import apiPkgJSON from '../package.json' assert { type: 'json' }
-
-export const vendoredVersion = apiPkgJSON.version
-
 import enq from 'enquirer'
 import ora from 'ora'
 import path from 'path'
@@ -235,8 +231,8 @@ const gen = async (new_project_path, pull_from_github, branch) => {
 
     Logger.success(
         '\nFinished!\n' +
-            'Go to https://handbook.aramtech.ly/#/rest/introduction to learn how you can properly use the framework.\n' +
-            'run `npm init` to modify package.json of the project to your liking.',
+        'Go to https://handbook.aramtech.ly/#/rest/introduction to learn how you can properly use the framework.\n' +
+        'run `npm init` to modify package.json of the project to your liking.',
     )
 }
 
