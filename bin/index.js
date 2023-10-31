@@ -10,7 +10,7 @@ program
     .command('create_rest')
     .description('use to generate a rest API project.')
     .option('-t, --tar', 'Download Tar From Github Api instead of using git')
-    .action((_, options) => {
+    .action((options) => {
         const tar = options?.tar
         start(tar)
     })

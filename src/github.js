@@ -164,26 +164,27 @@ async function github_api_client(repo_name, branch, new_project_path) {
     await downloadRepo(repo_name, branch, github_personal_access_token, new_project_path)
 }
 
-const get_repo_downloader = async (opts) => {
+const get_repo_downloader = opts => {
+    console.log(opts)
     try {
         if (opts.tar) {
             throw ''
         }
         exec('git --version')
-        exec(`git ls-remote ${template_repo_github_link}`)
+        exec(`git ls-remote ${repo_name_to_cli_link(opts.repository_name)}`)
         return git_cli_client
     } catch (_) {
         return github_api_client
     }
 }
 
-export const download_repo_to = async (repo_name, branch, to, user_tar) => {
-    const download = get_repo_downloader({ tar: user_tar })
+export const download_repo_to = async (repo_name, branch, to, use_tar = false) => {
+    const download = get_repo_downloader({ tar: use_tar, repository_name: repo_name })
     await download(repo_name, branch, to)
 
     Logger.success(
         '\nFinished!\n' +
-            'Go to https://handbook.aramtech.ly/#/rest/introduction to learn how you can properly use the framework.\n' +
-            'run `npm init` to modify package.json of the project to your liking.',
+        'Go to https://handbook.aramtech.ly/#/rest/introduction to learn how you can properly use the framework.\n' +
+        'run `npm init` to modify package.json of the project to your liking.',
     )
 }
