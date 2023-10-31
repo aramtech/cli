@@ -56,7 +56,7 @@ const read_project_path = async () => {
 }
 
 const read_branch = async () => {
-    const branches = ['fastify', 'express', 'v1']
+    const branches = ['fastify-typescript', 'fastify', 'express', 'v1']
 
     const { branch } = await enq.prompt({
         type: 'select',
@@ -231,8 +231,8 @@ const gen = async (new_project_path, pull_from_github, branch) => {
 
     Logger.success(
         '\nFinished!\n' +
-            'Go to https://handbook.aramtech.ly/#/rest/introduction to learn how you can properly use the framework.\n' +
-            'run `npm init` to modify package.json of the project to your liking.',
+        'Go to https://handbook.aramtech.ly/#/rest/introduction to learn how you can properly use the framework.\n' +
+        'run `npm init` to modify package.json of the project to your liking.',
     )
 }
 
