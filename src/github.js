@@ -164,7 +164,7 @@ async function github_api_client(repo_name, branch, new_project_path) {
     await downloadRepo(repo_name, branch, github_personal_access_token, new_project_path)
 }
 
-const get_repo_downloader = opts => {
+const get_repo_downloader = (opts) => {
     console.log(opts)
     try {
         if (opts.tar) {
@@ -184,7 +184,7 @@ export const download_repo_to = async (repo_name, branch, to, use_tar = false) =
 
     Logger.success(
         '\nFinished!\n' +
-        'Go to https://handbook.aramtech.ly/#/rest/introduction to learn how you can properly use the framework.\n' +
-        'run `npm init` to modify package.json of the project to your liking.',
+            'Go to https://handbook.aramtech.ly/#/rest/introduction to learn how you can properly use the framework.\n' +
+            'run `npm init` to modify package.json of the project to your liking.',
     )
 }
