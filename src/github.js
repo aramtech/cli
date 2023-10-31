@@ -1,4 +1,3 @@
-import enq from 'enquirer'
 import ora from 'ora'
 import path from 'path'
 import fs from 'fs'
@@ -7,6 +6,7 @@ import { execSync } from 'child_process'
 
 import Logger from './logger.js'
 import axios from 'axios'
+import { read_answer_to } from './prompt.js'
 
 const repo_name_to_api_link = (repo_name) => `https://api.github.com/repos/${repo_name}`
 
@@ -131,13 +131,9 @@ async function github_api_client(repo_name, branch, new_project_path) {
             process.exit(1)
         }
 
-        github_personal_access_token = (
-            await enq.prompt({
-                name: 'token',
-                type: 'input',
-                message: 'Please provide your classic personal github access token (you can create one at https://github.com/settings/tokens)\n\n Token:',
-            })
-        )?.token
+        github_personal_access_token = await read_answer_to(
+            'Please provide your classic personal github access token (you can create one at https://github.com/settings/tokens)\n\n Token:',
+        )
 
         loadingSpinner.text = 'Verifying Token...'
         loadingSpinner.start()
@@ -165,7 +161,6 @@ async function github_api_client(repo_name, branch, new_project_path) {
 }
 
 const get_repo_downloader = (opts) => {
-    console.log(opts)
     try {
         if (opts.tar) {
             throw ''

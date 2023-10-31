@@ -1,18 +1,12 @@
-import enq from 'enquirer'
 import path from 'path'
 import fs from 'fs'
 import Logger from './logger.js'
 
 import { download_repo_to } from './github.js'
+import { read_answer_to, read_choice } from './prompt.js'
 
 const read_project_path = async () => {
-    const new_project_path = (
-        await enq.prompt({
-            name: 'path',
-            type: 'input',
-            message: 'Enter project path (or leave empty to generate in current directory): ',
-        })
-    )?.path
+    const new_project_path = await read_answer_to('Enter project path (or enter `.` to generate in current directory): ')
 
     const the_path_is_invalid = !new_project_path.match(/^(?:(?:(\.\/)?[_\-a-zA-Z]+[_\-a-zA-Z0-9]*?)|\.)$/)
 
@@ -51,14 +45,7 @@ const read_project_path = async () => {
 
 const read_branch = async () => {
     const branches = ['fastify-typescript', 'fastify', 'express', 'v1']
-
-    const { branch } = await enq.prompt({
-        type: 'select',
-        name: 'branch',
-        choices: branches,
-    })
-
-    return branch.trim()
+    return await read_choice('Pick branch (fastify is recommended): ', branches)
 }
 
 export const start = async (tar = false) => {
