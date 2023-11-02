@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 
 import { program } from 'commander'
-import { create_rest } from '../src/ui.js'
+import { create_rest, create_plugin } from '../src/ui.js'
 import logo_in_text_art from '../src/logo_in_text_art.js'
 
 program.name('Aramtech CLI').description('CLI for bootstrapping aram tech projects.').addHelpText('beforeAll', logo_in_text_art).version('1.1.0')
@@ -13,6 +13,13 @@ program
     .action((options) => {
         const tar = options?.tar
         create_rest(tar)
+    })
+
+program
+    .command('create_plugin')
+    .description('use to generate a fastify plugin project.')
+    .action((_) => {
+        create_plugin()
     })
 
 program.parse()

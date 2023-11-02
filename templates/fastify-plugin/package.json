@@ -1,19 +1,19 @@
 {
-  "name": "fastify-plugin",
-  "version": "1.0.0",
-  "description": "",
-  "main": "index.js",
-  "scripts": {
-    "test": "vitest"
-  },
-  "author": "Aramtech",
-  "license": "UNLICENSED",
-  "devDependencies": {
-    "fastify": "^4.24.3",
-    "prettier": "^3.0.3",
-    "vitest": "^0.34.6"
-  },
-  "dependencies": {
-    "fastify-plugin": "^4.5.1"
-  }
+    "name": "fastify-plugin",
+    "version": "1.0.0",
+    "description": "",
+    "main": "index.js",
+    "scripts": {
+        "test": "vitest"
+    },
+    "author": "Aramtech",
+    "license": "UNLICENSED",
+    "devDependencies": {
+        "fastify": "^4.24.3",
+        "prettier": "^3.0.3",
+        "vitest": "^0.34.6"
+    },
+    "dependencies": {
+        "fastify-plugin": "^4.5.1"
+    }
 }
