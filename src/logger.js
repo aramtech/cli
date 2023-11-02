@@ -38,4 +38,4 @@ export const fatal = (message) => {
     process.exit(1)
 }
 
-export default { error, success, warning }
+export default { error, success, warning, fatal }
