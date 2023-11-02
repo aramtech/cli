@@ -48,7 +48,7 @@ const read_branch = async () => {
     return await read_choice('Pick branch (fastify is recommended): ', branches)
 }
 
-export const start = async (tar = false) => {
+export const create_rest = async (tar = false) => {
     const new_project_path = await read_project_path()
     const branch = await read_branch()
 
