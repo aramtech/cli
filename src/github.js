@@ -106,8 +106,7 @@ async function downloadRepo(repo_name, branch, github_personal_access_token, new
         })
     } catch (error) {
         console.log('status', error?.response?.status, 'Message', error?.message, 'name', error?.name)
-        Logger.error('Error: Something went wrong')
-        process.exit(1)
+        Logger.fatal('Error: Something went wrong')
     }
 }
 
@@ -115,7 +114,7 @@ async function github_api_client(repo_name, branch, new_project_path) {
     try {
         execSync('tar --version')
     } catch (error) {
-        Logger.error('please install "tar" extraction command line')
+        Logger.fatal('please install "tar" extraction command line')
     }
 
     let github_personal_access_token = ''
@@ -127,8 +126,7 @@ async function github_api_client(repo_name, branch, new_project_path) {
     while (true) {
         try_count += 1
         if (try_count >= 3) {
-            Logger.error('Maximum try count exceeded')
-            process.exit(1)
+            Logger.fatal('Maximum try count exceeded')
         }
 
         github_personal_access_token = await read_answer_to(
