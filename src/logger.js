@@ -1,3 +1,5 @@
+import process from 'process'
+
 const colors = {
     black: '\x1b[30m',
     red: '\x1b[31m',
@@ -29,6 +31,11 @@ export const success = (message) => {
 
 export const warning = (message) => {
     console.log(color_text('yellow', message))
+}
+
+export const fatal = (message) => {
+    error(message)
+    process.exit(1)
 }
 
 export default { error, success, warning }
