@@ -44,8 +44,8 @@ const read_project_path = async () => {
 }
 
 const read_branch = async () => {
-    const branches = ['fastify-typescript', 'fastify', 'express-typescript', 'express', 'v1']
-    return await read_choice('Pick branch (fastify is recommended): ', branches)
+    const branches = ['express-typescript', 'express', 'v1']
+    return await read_choice('Pick branch (express-typescript is recommended): ', branches)
 }
 
 export const create_rest = async (tar = false) => {
