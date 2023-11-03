@@ -4,7 +4,6 @@ import Logger from './logger.js'
 
 import { download_repo_to } from './github.js'
 import { read_answer_to, read_choice } from './prompt.js'
-import { generate_plugin_in } from './templates.js'
 
 const read_project_path = async () => {
     const new_project_path = await read_answer_to('Enter project path (or enter `.` to generate in current directory): ')
@@ -54,9 +53,4 @@ export const create_rest = async (tar = false) => {
     const branch = await read_branch()
 
     await download_repo_to(`aramtech/aramtech_rest_api_framework_empty_template`, branch, new_project_path, tar)
-}
-
-export const create_plugin = async () => {
-    const new_project_path = await read_project_path()
-    generate_plugin_in(new_project_path)
 }
