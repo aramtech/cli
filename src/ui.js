@@ -21,8 +21,7 @@ const read_project_path = async () => {
         const current_directory_content = fs.readdirSync('.')
 
         if (current_directory_content.length) {
-            Logger.error('\nFAILED: The Directory Must be Empty')
-            process.exit(1)
+            Logger.fatal('\nFAILED: The Directory Must be Empty')
         }
 
         return new_project_path.trim()
