@@ -44,7 +44,7 @@ const read_project_path = async () => {
 }
 
 const read_branch = async () => {
-    const branches = ['express-typescript', 'express', 'v1']
+    const branches = ['express-typescript', 'express']
     return await read_choice('Pick branch (express-typescript is recommended): ', branches)
 }
 
