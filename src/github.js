@@ -1,7 +1,6 @@
 import ora from 'ora'
 import path from 'path'
 import fs from 'fs'
-import { exec } from './exec.js'
 import { execSync } from 'child_process'
 
 import Logger from './logger.js'
@@ -9,17 +8,6 @@ import axios from 'axios'
 import { read_answer_to } from './prompt.js'
 
 const repo_name_to_api_link = (repo_name) => `https://api.github.com/repos/${repo_name}`
-
-const repo_name_to_cli_link = (repo_name) => `https://github.com/${repo_name}`
-
-async function git_cli_client(repo_name, branch, new_project_path) {
-    const full_new_project_path = path.resolve(new_project_path)
-    execSync(`git clone -b ${branch} ${repo_name_to_cli_link(repo_name)} ${new_project_path}`, {
-        stdio: 'inherit',
-    })
-    execSync(`rm -rf ${full_new_project_path}/.git `)
-    return
-}
 
 async function downloadRepo(repo_name, branch, github_personal_access_token, new_project_path) {
     const loadingSpinner = ora()
@@ -110,7 +98,7 @@ async function downloadRepo(repo_name, branch, github_personal_access_token, new
     }
 }
 
-async function github_api_client(repo_name, branch, new_project_path) {
+export async function download_repo_with_api(repo_name, branch, new_project_path) {
     try {
         execSync('tar --version')
     } catch (error) {
@@ -156,28 +144,4 @@ async function github_api_client(repo_name, branch, new_project_path) {
     }
 
     await downloadRepo(repo_name, branch, github_personal_access_token, new_project_path)
-}
-
-const get_repo_downloader = (opts) => {
-    try {
-        if (opts.tar) {
-            throw ''
-        }
-        exec('git --version')
-        exec(`git ls-remote ${repo_name_to_cli_link(opts.repository_name)}`)
-        return git_cli_client
-    } catch (_) {
-        return github_api_client
-    }
-}
-
-export const download_repo_to = async (repo_name, branch, to, use_tar = false) => {
-    const download = get_repo_downloader({ tar: use_tar, repository_name: repo_name })
-    await download(repo_name, branch, to)
-
-    Logger.success(
-        '\nFinished!\n' +
-            'Go to https://handbook.aramtech.ly/#/rest/introduction to learn how you can properly use the framework.\n' +
-            'run `npm init` to modify package.json of the project to your liking.',
-    )
 }

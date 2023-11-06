@@ -2,7 +2,8 @@ import path from 'path'
 import fs from 'fs'
 import Logger from './logger.js'
 
-import { download_repo_to } from './github.js'
+import { is_git_installed_on_system, is_repo_reachable_by_cli, get_files_with_git_cli } from './git.js'
+import { download_repo_with_api } from './github.js'
 import { read_answer_to, read_choice } from './prompt.js'
 
 const read_project_path = async () => {
@@ -50,6 +51,17 @@ const read_branch = async () => {
 export const create_rest = async (tar = false) => {
     const new_project_path = await read_project_path()
     const branch = await read_branch()
+    const repo_name = 'aramtech/aramtech_rest_api_framework_empty_template'
 
-    await download_repo_to(`aramtech/aramtech_rest_api_framework_empty_template`, branch, new_project_path, tar)
+    if (tar === false && is_git_installed_on_system() && is_repo_reachable_by_cli(repo_name)) {
+        await get_files_with_git_cli(repo_name, branch, new_project_path)
+    } else {
+        await download_repo_with_api(repo_name, branch, new_project_path)
+    }
+
+    Logger.success(
+        '\nFinished!\n' +
+            'Go to https://handbook.aramtech.ly/#/rest/introduction to learn how you can properly use the framework.\n' +
+            'run `npm init` to modify package.json of the project to your liking.',
+    )
 }
