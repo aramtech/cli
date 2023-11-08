@@ -6,6 +6,7 @@ import { execSync } from 'child_process'
 import Logger from './logger.js'
 import axios from 'axios'
 import { read_answer_to } from './prompt.js'
+import { command_on_system } from './exec.js'
 
 const repo_name_to_api_link = (repo_name) => `https://api.github.com/repos/${repo_name}`
 
@@ -99,9 +100,7 @@ async function downloadRepo(repo_name, branch, github_personal_access_token, new
 }
 
 export async function download_repo_with_api(repo_name, branch, new_project_path) {
-    try {
-        execSync('tar --version')
-    } catch (error) {
+    if (!command_on_system('tar')) {
         Logger.fatal('please install "tar" extraction command line')
     }
 

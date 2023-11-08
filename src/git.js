@@ -1,15 +1,8 @@
 import path from 'path'
 import { execSync } from 'child_process'
-import { exec } from './exec.js'
+import { exec, command_on_system } from './exec.js'
 
-export const is_git_installed_on_system = () => {
-    try {
-        execSync('git --version')
-        return true
-    } catch (_) {
-        return false
-    }
-}
+export const is_git_installed_on_system = () => command_on_system('git')
 
 const repo_name_to_cli_link = (repo_name) => `https://github.com/${repo_name}`
 
