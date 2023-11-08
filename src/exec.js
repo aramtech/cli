@@ -9,7 +9,7 @@ const exec = (command) => {
     return Buffer.from(execSync(command)).toString('utf-8')
 }
 
-const command_on_system = command => {
+const command_on_system = (command) => {
     try {
         exec(`${command} --version`)
         return true

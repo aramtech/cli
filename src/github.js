@@ -99,7 +99,7 @@ const download_repo_files = async (repo_name, branch, github_personal_access_tok
     }
 }
 
-export const get_files_with_github_api =  async (repo_name, branch, new_project_path) => {
+export const get_files_with_github_api = async (repo_name, branch, new_project_path) => {
     if (!command_on_system('tar')) {
         Logger.fatal('please install "tar" extraction command line')
     }
