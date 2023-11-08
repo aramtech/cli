@@ -24,8 +24,7 @@ export const is_repo_reachable_by_cli = (repository_name) => {
 
 export const get_files_with_git_cli = async (repo_name, branch, new_project_path) => {
     const full_new_project_path = path.resolve(new_project_path)
-    
-    
+
     execSync(`git clone --depth=1 -b ${branch} ${repo_name_to_cli_link(repo_name)} ${new_project_path}`, {
         stdio: 'inherit',
     })
