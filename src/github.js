@@ -10,7 +10,7 @@ import { command_on_system } from './exec.js'
 
 const repo_name_to_api_link = (repo_name) => `https://api.github.com/repos/${repo_name}`
 
-async function downloadRepo(repo_name, branch, github_personal_access_token, new_project_path) {
+const download_repo_files = async (repo_name, branch, github_personal_access_token, new_project_path) => {
     const loadingSpinner = ora()
     loadingSpinner.start()
 
@@ -99,7 +99,7 @@ async function downloadRepo(repo_name, branch, github_personal_access_token, new
     }
 }
 
-export async function download_repo_with_api(repo_name, branch, new_project_path) {
+export const get_files_with_github_api =  async (repo_name, branch, new_project_path) => {
     if (!command_on_system('tar')) {
         Logger.fatal('please install "tar" extraction command line')
     }
@@ -142,5 +142,5 @@ export async function download_repo_with_api(repo_name, branch, new_project_path
         }
     }
 
-    await downloadRepo(repo_name, branch, github_personal_access_token, new_project_path)
+    await download_repo_files(repo_name, branch, github_personal_access_token, new_project_path)
 }

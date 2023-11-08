@@ -3,7 +3,7 @@ import fs from 'fs'
 import Logger from './logger.js'
 
 import { is_git_installed_on_system, is_repo_reachable_by_cli, get_files_with_git_cli } from './git.js'
-import { download_repo_with_api } from './github.js'
+import { get_files_with_github_api } from './github.js'
 import { read_answer_to, read_choice } from './prompt.js'
 
 const read_project_path = async () => {
@@ -56,7 +56,7 @@ export const create_rest = async (tar = false) => {
     if (tar === false && is_git_installed_on_system() && is_repo_reachable_by_cli(repo_name)) {
         await get_files_with_git_cli(repo_name, branch, new_project_path)
     } else {
-        await download_repo_with_api(repo_name, branch, new_project_path)
+        await get_files_with_github_api(repo_name, branch, new_project_path)
     }
 
     Logger.success(
