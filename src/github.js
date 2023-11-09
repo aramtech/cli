@@ -1,7 +1,6 @@
 import ora from 'ora'
 import path from 'path'
 import fs from 'fs'
-import { execSync } from 'child_process'
 
 import Logger from './logger.js'
 import axios from 'axios'
@@ -60,33 +59,33 @@ const download_repo_files = async (repo_name, branch, github_personal_access_tok
             writer.on('close', () => {
                 if (!error) {
                     loadingSpinner.stop()
-                    execSync(`tar -xf ${tar_full_path} -C ${new_project_full_path}`, {
+                    run_command(`tar -xf ${tar_full_path} -C ${new_project_full_path}`, {
                         stdio: 'inherit',
                     })
 
-                    execSync(`rm -rf ${tar_full_path}`, {
+                    run_command(`rm -rf ${tar_full_path}`, {
                         stdio: 'inherit',
                     })
 
                     const extraction_path = path.join(
                         new_project_full_path,
                         Buffer.from(
-                            execSync(`ls`, {
+                            run_command(`ls`, {
                                 cwd: new_project_full_path,
                             }),
                         )
                             .toString('utf-8')
                             .trim(),
                     )
-                    execSync(`mv ${extraction_path}/* ./.`, {
+                    run_command(`mv ${extraction_path}/* ./.`, {
                         cwd: new_project_full_path,
                     })
 
-                    execSync(`mv ${path.join(extraction_path, '/.vscode')} .`, {
+                    run_command(`mv ${path.join(extraction_path, '/.vscode')} .`, {
                         cwd: new_project_full_path,
                     })
 
-                    execSync(`rm -rf ${extraction_path}`, {
+                    run_command(`rm -rf ${extraction_path}`, {
                         cwd: new_project_full_path,
                     })
                     resolve(true)
