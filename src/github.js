@@ -5,7 +5,7 @@ import fs from 'fs'
 import Logger from './logger.js'
 import axios from 'axios'
 import { read_answer_to } from './prompt.js'
-import { command_on_system } from './exec.js'
+import { command_on_system, run_command } from './exec.js'
 
 const repo_name_to_api_link = (repo_name) => `https://api.github.com/repos/${repo_name}`
 
